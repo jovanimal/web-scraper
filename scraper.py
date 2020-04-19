@@ -31,4 +31,3 @@ date = res_soup.find(style=re.compile("float:right")).getText()
 
 today = Statistic(date, klci, gainer, loser, unchanged)
 today.display()
-# print(date)
