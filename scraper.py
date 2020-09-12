@@ -1,6 +1,7 @@
 import requests
 import bs4 
 import re
+import openpyxl
 
 res = requests.get('https://www.malaysiastock.biz/Market-Watch.aspx')
 stats = requests.get('https://www.malaysiastock.biz/Market-Gauge.aspx')
@@ -31,3 +32,11 @@ date = res_soup.find(style=re.compile("float:right")).getText()
 
 today = Statistic(date, klci, gainer, loser, unchanged)
 today.display()
+
+wb = openpyxl.load_workbook('SA-scraper.xlsx')
+sheet = wb['Sheet1']
+sheet['D2358'].value = 999
+wb.save('example3.xlsx')
+print(sheet['D2358'].value)
+for i in range(1, 8, 2):
+    print(i, sheet.cell(row=i, column=2).value)
